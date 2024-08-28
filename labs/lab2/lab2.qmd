@@ -1,0 +1,9 @@
+---
+title: "Lab 2: Multiplexed 7-Segment Display"
+author: "Avery Smith"
+date: "8/27/24"
+categories:
+draft: false
+---
+
+## Lab 2: Multiplexed 7-Segment Display

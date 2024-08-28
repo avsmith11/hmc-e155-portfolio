@@ -1,0 +1,9 @@
+---
+title: "Lab 1: FPGA and MCU Setup and Testing Introduction"
+author: "Avery Smith"
+date: "8/27/24"
+categories:
+draft: false
+---
+
+## Lab 1: FPGA and MCU Setup and Testing Introduction

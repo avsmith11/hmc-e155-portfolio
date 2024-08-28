@@ -1,0 +1,10 @@
+---
+title: "E155 Labs"
+listing:
+  contents: labs
+  sort: "alphabetical"
+  type: default
+  categories: false
+---
+
+These are reflections and documentation from all the labs I will work on this semester. It is still a work-in-progress, but as I complete the labs, I will add info here!

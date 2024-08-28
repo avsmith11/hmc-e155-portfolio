@@ -1,0 +1,11 @@
+---
+title: "Lab 5: Interrupts"
+author: "Avery Smith"
+date: "8/27/24"
+categories:
+  - reflection
+  - labreport
+draft: false
+---
+
+## Lab 5: Interrupts

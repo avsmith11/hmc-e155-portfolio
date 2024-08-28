@@ -1,0 +1,11 @@
+---
+title: "Lab 3: Keypad Scanner"
+author: "Avery Smith"
+date: "8/27/24"
+categories:
+  - reflection
+  - labreport
+draft: false
+---
+
+## Lab 3: Keypad Scanner
