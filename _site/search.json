@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources and Acknowlegements",
+    "section": "",
+    "text": "All the labs listed here are from the E155 website"
+  },
+  {
+    "objectID": "labs.html",
+    "href": "labs.html",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "These are reflections and documentation from all the labs I will work on this semester. It is still a work-in-progress, but as I complete the labs, I will add info here!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLab 1: FPGA and MCU Setup and Testing Introduction\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 2: Multiplexed 7-Segment Display\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 3: Keypad Scanner\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 4: Digital Audio\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 5: Interrupts\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 6: The Internet of Things and Serial Peripheral Interface\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 7: The Advanced Encryption Standard\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "E155 Portfolio",
+    "section": "",
+    "text": "Avery Smith is third year engineering major at Harvey Mudd College. At HMC, he has worked in RESIST Lab under Prof. Dre Helmns working with control systems for HVAC applications. He is also active in the Pomona College Theatre Department with theatre as his HSA concentration. He also enjoys the outdoors and takes any chance to go on an adventure. He is taking e155 this semester and looks forward to building his understanding of digital design and communication."
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "E155 Blog",
+    "section": "",
+    "text": "Hello Quarto\n\n\n\n\n\nFirst Post - Learning Goals\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/first-post.html",
+    "href": "posts/first-post.html",
+    "title": "Hello Quarto",
+    "section": "",
+    "text": "I want to (and am required by my instructor) to start off this blog by discussing my learning goals for this course. First, I’ll talk a bit about why I chose to take this course, then I’ll discuss what I’d like to get out of it. For context for anyone unrelated to Harvey Mudd College, E155 otherwise known as Micro Ps is one of the most feared in the engineering department. This is mostly due to the challenging work and hours and hours of lab-time required every week. However, anyone who’s taken it will also tell you that they learned more in this class than in any other they’ve taken. It follows the concepts of E85: Digital Electronics and Computer Engineering and was recommded for those who enjoyed that class. And, well, as of last semester when I took E85, it was one of the best I had taken so far. This came as no srprise since I’ve always been interested in electronics, especially digital electronics, so when it came time to choose my courses for this semester and microprocessors was offered as an upper-div elective, I decided to take it.\nI expect that this class will be the most demanding I have ever taken, requiring lots of time and expecting high-quality work. I’ve had to face the first challenge before, but I’ve yet to take a class that demands high-quality deliverables like that. I see this as an opportunity to dip my feet in to what it’s like to be a real engineer. In prior classes like E80 (a project-based systems/electronics/robotics course required for the major), the deliverables were important, but what was more important was our work and learning. In this class, I get the sense that our end-products are the most important–like in most real-world engineering jobs. I love to problem-solve and find creative solutions to difficult problems, but I sometimes have trouble seeing things through to the end and developing high-quality products. I’m excited to take our TA’s advice and enjoy this class by putting in the time. There’s so much I’m excited to explore, and I can’t wait to get into it."
+  }
+]
