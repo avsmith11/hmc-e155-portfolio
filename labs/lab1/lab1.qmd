@@ -10,7 +10,9 @@ draft: false
 
 ## Lab 1: FPGA and MCU Setup and Testing Introduction
 Time spent: 15 hours
+
 [GitHub Repository](https://github.com/avsmith11/e155-lab1)
+
 ### Main Goals:
 
 This week, I soldered the dev-board including through-hole and surface-mount technology. I also set up and learned to use the programs used to make this website (Quarto, GitHub) and interface with the FPGA and MCU (QuestaSim, Radiant, Segger, and more GitHub). Finally, I wrote a System Verilog module to control a 7-segment hexadecimal display, built the accompanying circuit, and uploaded it to the FPGA.
