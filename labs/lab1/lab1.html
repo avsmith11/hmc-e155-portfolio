@@ -182,13 +182,120 @@ ul.task-list li input[type="checkbox"] {
 <p>The main goal was to make a program to make a seven-segment representation of a hex digit corresponding to 4 dip switches on the dev board. In addition, we were asked to make one of the onboard LEDs blink at 2.4Hz and two more change their states based on the switch positions.</p>
 <p>The system verilog for this week was straightforward. First, I figured out how to blink the LED. The lab description suggested we use the configurable high-speed oscillator (HSOSC) on the FPGA. I set the frequency to 24MHz and then created a counter to reset at 10,000,000. Since 24MHz/10,000,000 = 2.4Hz, I made the LED change every time the counter resets.</p>
 <p>The truth tables given for the two other onboard LEDs could be represented as an XOR operator on the first two bits and an AND on the second two. This was easily accomplished with assign statements. Then, I used a case statement to encode the truth table for display outputs.</p>
-<p>Once this was written, I chased errors mostly due to bad syntax before I imported the file to Questa sim. Getting Questa to work as expected was more difficult than expected, but after using Radiant’s simulation wizard to create a new Questa project that included the source program and the libraries for the FPGA (which included the HSCOSC module). Since Questa uses a different compiler than Radiant, there were some more syntax issues I needed to fix. After this was done, I used force commands as suggested to set the switch positions and observed the output in the wave view. <img src="sim1.png" class="img-fluid"> <img src="sim2.png" class="img-fluid"> I had some issues getting the s bus to change value even after force statements, but what I saw made enough sense that I decided to move on. Though I didn’t know it at the time, I had ordered the bits of the 7-segment display opposite of what I wanted, which you can see in the figures above.</p>
-<p>After a moderately successful simulation, I looked at the block diagram given by Radiant. <img src="top_schematic.png" class="img-fluid"> As you can see, despite the very large number required by the counter, the structure is fairly simple. I was also curious how the seg_driver was interpreted, so I found its schematic. I would expect this block to be some K-map simplified gate array, but instead, I saw this <img src="seg_schematic.png" class="img-fluid"></p>
+<p>Once this was written, I chased errors mostly due to bad syntax before I imported the file to Questa sim. Getting Questa to work as expected was more difficult than expected, but after using Radiant’s simulation wizard to create a new Questa project that included the source program and the libraries for the FPGA (which included the HSCOSC module). Since Questa uses a different compiler than Radiant, there were some more syntax issues I needed to fix. After this was done, I used force commands as suggested to set the switch positions and observed the output in the wave view.</p>
+<p><img src="images/sim1.png" class="img-fluid"></p>
+<p><img src="images/sim2.png" class="img-fluid"></p>
+<p>I had some issues getting the s bus to change value even after force statements, but what I saw made enough sense that I decided to move on. Though I didn’t know it at the time, I had ordered the bits of the 7-segment display opposite of what I wanted, which you can see in the figures above.</p>
+<p>After a moderately successful simulation, I looked at the block diagram given by Radiant.</p>
+<p><img src="images/top_schematic.png" class="img-fluid"></p>
+<p>As you can see, despite the very large number required by the counter, the structure is fairly simple. I was also curious how the seg_driver was interpreted, so I found its schematic. I would expect this block to be some K-map simplified gate array, but instead, I saw this</p>
+<p><img src="images/seg_schematic.png" class="img-fluid"></p>
 <p>This diagram was interesting, and I’d love to learn what Radiant thinks it’s doing here but I decided to move on and trust the process.</p>
 <p>At this point, I had already assembled the 7-segment display circuit. The displays we used have a common-cathode design, meaning the display is powered by one pin, and each segment can be toggled by setting its corresponding pin low so current can drain through the LED. I put a current-limiting resistor on the common cathode. The lab description says these LEDs like to be powered with between 5-20mA. I chose an 80Ohm resistor so that I = 3.3V/50Ohm = 66mA. This way when only 2 segments are lit for the number 1, each gets around 20mA, and when all 7 are lit for the number 8, each gets around 6mA.</p>
-<p>With the circuit assembled and the pins connected to the FPGA, all that was left was to assign pins (I kept track of the 7-segment display’s pins in a text document in the GitHub repo) and upload to the board. I did this but found that a few things still needed to be fixed. <img src="fail.heic" class="img-fluid" alt="First Attempt"></p>
+<p>With the circuit assembled and the pins connected to the FPGA, all that was left was to assign pins (I kept track of the 7-segment display’s pins in a text document in the GitHub repo) and upload to the board. I did this but found that a few things still needed to be fixed.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fail.jpg" class="img-fluid figure-img"></p>
+<figcaption>First Attempt</figcaption>
+</figure>
+</div>
 <p>One segment was not lighting at all as shown in the figure above, and several of the digits were incorrect. I fixed the first issue by changing which pin the segment used. The second issue was caused by the reverse-ordered bits in the seg bus. Once I fixed this, the display was working correctly and met the requirements of the lab. All 16 digits are shown below for your viewing pleasure.</p>
-<p><img src="0.heic" class="img-fluid" alt="0"> <img src="1.heic" class="img-fluid" alt="1"> <img src="2.heic" class="img-fluid" alt="2"> <img src="3.heic" class="img-fluid" alt="3"> <img src="4.heic" class="img-fluid" alt="4"> <img src="5.heic" class="img-fluid" alt="5"> <img src="6.heic" class="img-fluid" alt="6"> <img src="7.heic" class="img-fluid" alt="7"> <img src="8.heic" class="img-fluid" alt="8"> <img src="9.heic" class="img-fluid" alt="9"> <img src="A.heic" class="img-fluid" alt="A"> <img src="b.heic" class="img-fluid" alt="b"> <img src="c.heic" class="img-fluid" alt="c"> <img src="d.heic" class="img-fluid" alt="d"> <img src="e.heic" class="img-fluid" alt="e"> <img src="f.heic" class="img-fluid" alt="f"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/0.jpg" class="img-fluid figure-img"></p>
+<figcaption>0</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/1.jpg" class="img-fluid figure-img"></p>
+<figcaption>1</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/2.jpg" class="img-fluid figure-img"></p>
+<figcaption>2</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/3.jpg" class="img-fluid figure-img"></p>
+<figcaption>3</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/4.jpg" class="img-fluid figure-img"></p>
+<figcaption>4</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/5.png" class="img-fluid figure-img"></p>
+<figcaption>5</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/6.jpg" class="img-fluid figure-img"></p>
+<figcaption>6</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/7.jpg" class="img-fluid figure-img"></p>
+<figcaption>7</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/8.jpg" class="img-fluid figure-img"></p>
+<figcaption>8</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/9.jpg" class="img-fluid figure-img"></p>
+<figcaption>9</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/A.jpg" class="img-fluid figure-img"></p>
+<figcaption>A</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/b.jpg" class="img-fluid figure-img"></p>
+<figcaption>b</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/c.jpg" class="img-fluid figure-img"></p>
+<figcaption>c</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/d.jpg" class="img-fluid figure-img"></p>
+<figcaption>d</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/e.jpg" class="img-fluid figure-img"></p>
+<figcaption>e</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/f.jpg" class="img-fluid figure-img"></p>
+<figcaption>f</figcaption>
+</figure>
+</div>
 
 
 </section>
