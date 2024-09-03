@@ -58,39 +58,39 @@ At this point, I had already assembled the 7-segment display circuit. The displa
 
 With the circuit assembled and the pins connected to the FPGA, all that was left was to assign pins (I kept track of the 7-segment display's pins in a text document in the GitHub repo) and upload to the board. I did this but found that a few things still needed to be fixed. 
 
-![First Attempt](images/fail.jpg)
+![First Attempt](images/fail.jpg){width=50%}
 
 
 One segment was not lighting at all as shown in the figure above, and several of the digits were incorrect. I fixed the first issue by changing which pin the segment used. The second issue was caused by the reverse-ordered bits in the seg bus. Once I fixed this, the display was working correctly and met the requirements of the lab. All 16 digits are shown below for your viewing pleasure.
 
-![0](images/0.jpg)
+![0](images/0.jpg){width=50%}
 
-![1](images/1.jpg)
+![1](images/1.jpg){width=50%}
 
-![2](images/2.jpg)
+![2](images/2.jpg){width=50%}
 
-![3](images/3.jpg)
+![3](images/3.jpg){width=50%}
 
-![4](images/4.jpg)
+![4](images/4.jpg){width=50%}
 
-![5](images/5.png)
+![5](images/5.png){width=50%}
 
-![6](images/6.jpg)
+![6](images/6.jpg){width=50%}
 
-![7](images/7.jpg)
+![7](images/7.jpg){width=50%}
 
-![8](images/8.jpg)
+![8](images/8.jpg){width=50%}
 
-![9](images/9.jpg)
+![9](images/9.jpg){width=50%}
 
-![A](images/A.jpg)
+![A](images/A.jpg){width=50%}
 
-![b](images/b.jpg)
+![b](images/b.jpg){width=50%}
 
-![c](images/c.jpg)
+![c](images/c.jpg){width=50%}
 
-![d](images/d.jpg)
+![d](images/d.jpg){width=50%}
 
-![e](images/e.jpg)
+![e](images/e.jpg){width=50%}
 
-![f](images/f.jpg)
+![f](images/f.jpg){width=50%}
