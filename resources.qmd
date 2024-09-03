@@ -2,3 +2,5 @@
 title: Resources and Acknowlegements
 ---
 All the labs listed here are from the [E155 website](https://hmc-e155.github.io/)
+
+Lattice Semiconductors has a [YouTube series](https://www.youtube.com/@latticesemiconductor) explaining Radiant's tools and workflow. This was immensly helpful during Lab 1
