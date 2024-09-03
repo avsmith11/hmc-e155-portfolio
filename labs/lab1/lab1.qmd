@@ -32,13 +32,22 @@ The truth tables given for the two other onboard LEDs could be represented as an
 
 
 Once this was written, I chased errors mostly due to bad syntax before I imported the file to Questa sim. Getting Questa to work as expected was more difficult than expected, but after using Radiant's simulation wizard to create a new Questa project that included the source program and the libraries for the FPGA (which included the HSCOSC module). Since Questa uses a different compiler than Radiant, there were some more syntax issues I needed to fix. After this was done, I used force commands as suggested to set the switch positions and observed the output in the wave view.
-![](sim1.png)
-![](sim2.png)
+
+![](images/sim1.png)
+
+![](images/sim2.png)
+
 I had some issues getting the s bus to change value even after force statements, but what I saw made enough sense that I decided to move on. Though I didn't know it at the time, I had ordered the bits of the 7-segment display opposite of what I wanted, which you can see in the figures above.
 
 
-After a moderately successful simulation, I looked at the block diagram given by Radiant. ![](top_schematic.png)
-As you can see, despite the very large number required by the counter, the structure is fairly simple. I was also curious how the seg_driver was interpreted, so I found its schematic. I would expect this block to be some K-map simplified gate array, but instead, I saw this ![](seg_schematic.png)
+After a moderately successful simulation, I looked at the block diagram given by Radiant. 
+
+![](images/top_schematic.png)
+
+As you can see, despite the very large number required by the counter, the structure is fairly simple. I was also curious how the seg_driver was interpreted, so I found its schematic. I would expect this block to be some K-map simplified gate array, but instead, I saw this 
+
+![](images/seg_schematic.png)
+
 
 
 This diagram was interesting, and I'd love to learn what Radiant thinks it's doing here but I decided to move on and trust the process.
@@ -47,24 +56,41 @@ This diagram was interesting, and I'd love to learn what Radiant thinks it's doi
 At this point, I had already assembled the 7-segment display circuit. The displays we used have a common-cathode design, meaning the display is powered by one pin, and each segment can be toggled by setting its corresponding pin low so current can drain through the LED. I put a current-limiting resistor on the common cathode. The lab description says these LEDs like to be powered with between 5-20mA. I chose an 80Ohm resistor so that I = 3.3V/50Ohm = 66mA. This way when only 2 segments are lit for the number 1, each gets around 20mA, and when all 7 are lit for the number 8, each gets around 6mA.
 
 
-With the circuit assembled and the pins connected to the FPGA, all that was left was to assign pins (I kept track of the 7-segment display's pins in a text document in the GitHub repo) and upload to the board. I did this but found that a few things still needed to be fixed. ![First Attempt](fail.heic)
+With the circuit assembled and the pins connected to the FPGA, all that was left was to assign pins (I kept track of the 7-segment display's pins in a text document in the GitHub repo) and upload to the board. I did this but found that a few things still needed to be fixed. 
+
+![First Attempt](images/fail.heic)
 
 
 One segment was not lighting at all as shown in the figure above, and several of the digits were incorrect. I fixed the first issue by changing which pin the segment used. The second issue was caused by the reverse-ordered bits in the seg bus. Once I fixed this, the display was working correctly and met the requirements of the lab. All 16 digits are shown below for your viewing pleasure.
 
-![0](0.heic)
-![1](1.heic)
-![2](2.heic)
-![3](3.heic)
-![4](4.heic)
-![5](5.heic)
-![6](6.heic)
-![7](7.heic)
-![8](8.heic)
-![9](9.heic)
-![A](A.heic)
-![b](b.heic)
-![c](c.heic)
-![d](d.heic)
-![e](e.heic)
-![f](f.heic)
+![0](images/0.heic)
+
+![1](images/1.heic)
+
+![2](images/2.heic)
+
+![3](images/3.heic)
+
+![4](images/4.heic)
+
+![5](images/5.heic)
+
+![6](images/6.heic)
+
+![7](images/7.heic)
+
+![8](images/8.heic)
+
+![9](images/9.heic)
+
+![A](images/A.heic)
+
+![b](images/b.heic)
+
+![c](images/c.heic)
+
+![d](images/d.heic)
+
+![e](images/e.heic)
+
+![f](images/f.heic)
