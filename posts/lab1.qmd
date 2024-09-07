@@ -1,0 +1,11 @@
+---
+title: "Week 1 Reflection"
+description: "Complaining about Lab 1"
+categories:
+    - Reflection
+author: "Avery Smith"
+date: "9/7/24"
+draft: false
+---
+
+Week 1 of this course was deceptively difficult. The main purpose of the lab was to make a seven-segment display controller to represent hex 0-F based on the position of 4 onboard dip-switches. This design challenge was straightforward and mostly easy for me to figure out. However, since this was the first lab of the class, I had to download and setup all of the FPGA/MCU programming, interfacing, and simulation software while using GitHub for the first time in ernest. Between licensing issues, duplicate main/master branches, and MCU firmware issues, it's not an exaggeration to say this was the most difficult first assignment I've ever had. That being said (and I had to write about it somehwere), after navigating this lab, I feel like I can take on anything this class has to throw at me. I'm excited to work with System Verilog (a phrase I never thought I would say) to make real-life designs.
