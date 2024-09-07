@@ -49,8 +49,8 @@
     "text": "These are reflections and documentation from all the labs I will work on this semester. It is still a work-in-progress, but as I complete the labs, I will add info here!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLab 1: FPGA and MCU Setup and Testing Introduction\n\n\n\n\n\n\n\n\n\n\n\nSep 3, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 2: Multiplexed 7-Segment Display\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 3: Keypad Scanner\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 4: Digital Audio\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 5: Interrupts\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 6: The Internet of Things and Serial Peripheral Interface\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 7: The Advanced Encryption Standard\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/lab1.html",
-    "href": "posts/lab1.html",
+    "objectID": "posts/week1.html",
+    "href": "posts/week1.html",
     "title": "Week 1 Reflection",
     "section": "",
     "text": "Week 1 of this course was deceptively difficult. The main purpose of the lab was to make a seven-segment display controller to represent hex 0-F based on the position of 4 onboard dip-switches. This design challenge was straightforward and mostly easy for me to figure out. However, since this was the first lab of the class, I had to download and setup all of the FPGA/MCU programming, interfacing, and simulation software while using GitHub for the first time in ernest. Between licensing issues, duplicate main/master branches, and MCU firmware issues, it’s not an exaggeration to say this was the most difficult first assignment I’ve ever had. That being said (and I had to write about it somehwere), after navigating this lab, I feel like I can take on anything this class has to throw at me. I’m excited to work with System Verilog (a phrase I never thought I would say) to make real-life designs."
