@@ -1,7 +1,7 @@
 ---
 title: "Lab 2: Multiplexed 7-Segment Display"
 author: "Avery Smith"
-date: "8/27/24"
+date: "9/10/24"
 categories:
 draft: false
 ---
