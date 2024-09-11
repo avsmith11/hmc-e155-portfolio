@@ -3,8 +3,6 @@ title: "Hello Quarto"
 description: "First Post - Learning Goals"
 author: "Avery Smith"
 date: "8/27/24"
-categories:
-  - reflection
 draft: false
 ---
 
