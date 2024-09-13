@@ -7,8 +7,8 @@ draft: false
 ---
 
 ## Lab 2: Multiplexed 7-Segment Display
-Time spent: 12 Hours
-[GitHub Repository]
+Time spent: 13 Hours
+[GitHub Repository](http://localhost:6557/labs/lab2/lab2.html)
 
 ## Main Goals
 The point of this lab is to drive two seven-segment displays using one seven-segment encoder. This was to be achieved by generating a time-multiplexed display signal meaning the output of the encoder will switch rapidly between what display 1 and 2 should read, along with corresponding enable signals for each display. In general, multiplexing can decrease cost since a single piece of hardware can be used for many purposes. Additionally, the sum should be displayed on 5 LEDs.
@@ -16,11 +16,11 @@ The point of this lab is to drive two seven-segment displays using one seven-seg
 ## Summary
 To meet these goals, I designed the following layout.
 ![](images/block_diagram.jpg)
-The system takes in s1, and s2 (set by the onbaord and one external dip-switch) and outputs sum: the sum signal to send to the leds, seg: the 7-seg encoded signal for the display, and en1 and en2: enable signals to switch between active displays. 
+The system takes in s1, and s2 (set by the onboard and one external dip-switch) and outputs sum: the sum signal to send to the LEDs, seg: the 7-seg encoded signal for the display, and en1 and en2: enable signals to switch between active displays. 
 
-I chose to switch active displays at F = 1.46kHz (12MHz/2^13) since this is well above the threshold for humans to percieve flickering, but slow enough that hardware issues are not a concnern. I decided to implement this with a clock divider since it was the simplest way to implement this functionality, but in more complicated sequential design requiring low-freuency flops, they should take in an enable signal.
+I chose to switch active displays at F = 1.46kHz (12MHz/2^13) since this is well above the threshold for humans to perceive flickering, but slow enough that hardware issues are not a concern. I decided to implement this with a clock divider since it was the simplest way to implement this functionality. Still, in more complicated sequential designs requiring low-frequency flops, they should take in an enable signal.
 
-I wrote the top module and created the elements in a Radiant project and checked the netlist analyzer to make sure it matched my intended design. Sure enough it did, except for the segment encoder (again, but at this point it will be a running bit since it still works!)
+I wrote the top module, created the elements in a Radiant project, and checked the netlist analyzer to ensure it matched my intended design. Sure enough, it did, except for the segment encoder (again, but at this point it will be a running bit since it still works!)
 
 Top:
 ![](images/top_radiant.png)
@@ -34,19 +34,19 @@ Time Mux:
 Segment Encoder:
 ![](images/segment_driver.png)
 
-I used QuestaSim to simulate the adder and time_mux modules. After some tweaking, the adder and time multiplexer worked as expected
+I used QuestaSim to simulate the adder and time_mux modules. After some tweaking, the adder and time multiplexer worked as expected.
 
 Adder:![](images/adder_tb.png)
 
 Time Multiplexer: ![](images/time_mux_tb.png)
 
-Since I had already simulated the encoder last week, I skipped that and went right to simulating the top module. Some further fixing and tweaking, and it worked as expected (although I forgot to take a screenshot).
+Since I had already simulated the encoder last week, I skipped that and went right to simulate the top module. I did some further fixing and tweaking, and it worked as expected (although I forgot to take a screenshot).
 
-A consideration for this lab, and any FPGA project is how to drive all the necessary hardware without exceeding the current limit of the FPGA pins. The suggested current limit is +/- 8mA. This value is not a strict limit, and as we saw last lab, the current into a pin can reach 15mA-20mA without issue. However, since the common-anode displays must be supplied with much more current than this, two 2N3906 PNP transistors were used to drive the enable signals for the displays. The base signals of the transistors were connected to the FPGA, so current will flow from collector to emmitter when the FPGA pins are pulled low. 510Ohm resistors were used to limit the 3.3V current through the base node to 5.2mA (I = 510/3.3). I used 470Ohm resistors for the LEDs to get 7.0mA and 150Ohm for the segment display to get 22mA, but since we did that last lab, I know it will work. The schamtic for each element is below.
+A consideration for this lab, and any FPGA project is how to drive all the necessary hardware without exceeding the current limit of the FPGA pins. The suggested current limit is +/- 8mA. This value is not a strict limit, and as we saw last lab, the current into a pin can reach 15mA-20mA without issue. However, since the common-anode displays must be supplied with much more current than this, two 2N3906 PNP transistors were used to drive the enable signals for the displays. The base signals of the transistors were connected to the FPGA, so current would flow from the collector to the emitter when the FPGA pins were pulled low. 510Ohm resistors were used to limit the 3.3V current through the base node to 5.2mA (I = 510/3.3). I used 470Ohm resistors for the LEDs to get 7.0mA and 150Ohm for the segment display to get 22mA, but since we did that last lab, I know it will work. The schematic for each element is below.
 
 ![](images/schematic.jpg)
 
-With the circuit assembled and the logic designed, the FPGA was ready for programming. The system worked as expected for most inputs, but for certain combinations, the left segment display was flickering terribly, and the sum leds were inconsistent in their bit assignment. After poking around with Prof. Brake, we determined that the issue lied somehwere in the hardware. After noticing that placing my finger under the breakout cable connections on the bottom of the dev board fixed the flickering issue, I hypothesized that there were floating values somewhere that were fixed by the dialectric of my finger. I changed the internal pull-up resistors to 3.3kOhm, and, like magic (but not really maggic), it started working.
+With the circuit assembled and the logic designed, the FPGA was ready for programming. The system worked as expected for most inputs, but for certain combinations, the left segment display was flickering terribly, and the sum LEDs were inconsistent in their bit assignment. After poking around with Prof. Brake, we determined that the issue lay somewhere in the hardware. After noticing that placing my finger under the breakout cable connections on the bottom of the dev board fixed the flickering issue, I hypothesized that there were floating values somewhere that were fixed by the dielectric of my finger. I changed the internal pull-up resistors to 3.3kOhm, and, like magic (but not really magic), it started working.
 
 Below are some pictures of the display and sum working as intended:
 
