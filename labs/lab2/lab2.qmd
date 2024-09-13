@@ -46,6 +46,13 @@ A consideration for this lab, and any FPGA project is how to drive all the neces
 
 ![](images/schematic.jpg)
 
-With the circuit assembled and the logic designed, the FPGA was ready for programming. The system worked as expected for most inputs, but for certain combinations, the left segment display was flickering terribly, and the sum leds were inconsistent in their bit assignment. After poking around with Prof. Brake, we determined that the issue lied somehwere in the hardware. Some input pins seemed to have continuity with the output which was causing interference. The extent of the flickering could be changed by wiggling the connector from the dev board to the bread board, so that was likely the culprit.
+With the circuit assembled and the logic designed, the FPGA was ready for programming. The system worked as expected for most inputs, but for certain combinations, the left segment display was flickering terribly, and the sum leds were inconsistent in their bit assignment. After poking around with Prof. Brake, we determined that the issue lied somehwere in the hardware. After noticing that placing my finger under the breakout cable connections on the bottom of the dev board fixed the flickering issue, I hypothesized that there were floating values somewhere that were fixed by the dialectric of my finger. I changed the internal pull-up resistors to 3.3kOhm, and, like magic (but not really maggic), it started working.
 
-I'm coming back to this, but at this point, the stock room is locked, so I can't try another ribbon cable. Next steps include asking prof. Brake for help, using the FPGA directly on the breadboard, or (though hopefully not), turning in what I have now. 
+Below are some pictures of the display and sum working as intended:
+
+![](images/test1.jpg)
+![](images/test2.jpg)
+![](images/test3.jpg)
+![](images/test4.jpg)
+![](images/test5.jpg)
+![](images/test6.jpg)
