@@ -6,8 +6,9 @@ categories:
 draft: false
 ---
 
-## Lab 2: Multiplexed 7-Segment Display
+
 Time spent: 13 Hours
+
 [GitHub Repository](http://localhost:6557/labs/lab2/lab2.html)
 
 ## Main Goals
