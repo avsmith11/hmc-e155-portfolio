@@ -32,7 +32,7 @@ In states S0-S3, the corresponding row (rx) is set high and the scanner looks fo
 The next module I designed was the debouncer. This module handles two of the lab specifications:
 1. If multiple buttons are pressed at the same time, only the first one should register
 2. A button push should only be registered once
-In general, a debouncer is a piece of hardware or software the ignores the instability of a switch or button for a short period after it is pressed. This instability is called switch bounce. Since this can occur over a period of 1-5 ms, I decided to measure the bounce of my pin pad using the oscilloscopes in lab. After testing several times, I did not observe any bounce, but I still made the module since it is required for the lab. I designed it as another FSM pictured below. 
+In general, a debouncer is a piece of hardware or software the ignores the instability of a switch or button for a short period after it is pressed. This instability is called switch bounce. Since this can occur over a period of 1-5 ms, I decided to measure the bounce of my pin pad using the oscilloscopes in lab. After testing several times, I did not observe any bounce, but I still made the module since it is required for the lab. I designed it as another FSM pictured below. I chose a value on the small end of this scale since choosing a larger debouncing tolerance could result in a noticable input delay.
 
 ![](images/debouncer_fsm.png)
 
