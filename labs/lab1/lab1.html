@@ -122,11 +122,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lab-1-fpga-and-mcu-setup-and-testing-introduction" id="toc-lab-1-fpga-and-mcu-setup-and-testing-introduction" class="nav-link active" data-scroll-target="#lab-1-fpga-and-mcu-setup-and-testing-introduction">Lab 1: FPGA and MCU Setup and Testing Introduction</a>
-  <ul class="collapse">
-  <li><a href="#main-goals" id="toc-main-goals" class="nav-link" data-scroll-target="#main-goals">Main Goals:</a></li>
+  <li><a href="#main-goals" id="toc-main-goals" class="nav-link active" data-scroll-target="#main-goals">Main Goals:</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary:</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -168,8 +165,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="lab-1-fpga-and-mcu-setup-and-testing-introduction" class="level2">
-<h2 class="anchored" data-anchor-id="lab-1-fpga-and-mcu-setup-and-testing-introduction">Lab 1: FPGA and MCU Setup and Testing Introduction</h2>
 <p>Time spent: 15 hours</p>
 <p><a href="https://github.com/avsmith11/e155-lab1">GitHub Repository</a></p>
 <section id="main-goals" class="level3">
@@ -193,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
 <p>As you can see, despite the very large number required by the counter, the structure is fairly simple. I was also curious how the seg_driver was interpreted, so I found its schematic. I would expect this block to be some K-map simplified gate array, but instead, I saw this</p>
 <p><img src="images/seg_schematic.png" class="img-fluid"></p>
 <p>This diagram was interesting, and I’d love to learn what Radiant thinks it’s doing here but I decided to move on and trust the process. Prof.&nbsp;Brake suggested that the long binary encodes some information like a lookup table would, but this is clearly not the hardware I implied.</p>
-<p>At this point, I had already assembled the 7-segment display circuit. The displays we used have a common-cathode design, meaning the display is powered by one pin, and each segment can be toggled by setting its corresponding pin low so current can drain through the LED. I placed a current-limiting resistor at the anode of each segment. This uses more resistors than having on at the common cathode, but ensures the current through each segment does not depend on how many are lit in total. The lab description suggests 5-20mA. I found the value of the resistor with R = 5V/20mA = 250Ohms.</p>
+<p>At this point, I had already assembled the 7-segment display circuit. The displays we used have a common-cathode design, meaning the display is powered by one pin, and each segment can be toggled by setting its corresponding pin low so current can drain through the LED. I placed a current-limiting resistor at the anode of each segment. This uses more resistors than having on at the common cathode, but ensures the current through each segment does not depend on how many are lit in total. The lab description suggests 5-20mA. I used a 250Ohm resistor, so I = (3.3V - 0.7V)/250 Ohm = 10mA</p>
 <p><img src="images/Schematic.jpg" class="img-fluid"></p>
 <p>With the circuit assembled and the pins connected to the FPGA, all that was left was to assign pins (I kept track of the 7-segment display’s pins in a text document in the GitHub repo) and upload to the board. I did this but found that a few things still needed to be fixed.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -301,7 +296,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

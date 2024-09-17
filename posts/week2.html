@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Avery Smith">
+<meta name="dcterms.date" content="2024-09-13">
+<meta name="description" content="Getting help with pesky bugs">
 
-<title>E155 Labs – E155 Portfolio</title>
+<title>Week 2 Reflection – E155 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +69,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -138,7 +81,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">E155 Portfolio</span>
     </a>
   </div>
@@ -149,19 +92,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./labs.html" aria-current="page"> 
+    <a class="nav-link" href="../labs.html"> 
 <span class="menu-text">Labs</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resources.html"> 
+    <a class="nav-link" href="../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
@@ -183,14 +126,34 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">E155 Labs</h1>
-</div>
+<h1 class="title">Week 2 Reflection</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Reflection</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Getting help with pesky bugs
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Avery Smith </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 13, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -200,230 +163,14 @@ window.Quarto = {
 </header>
 
 
-<p>These are reflections and documentation from all the labs I will work on this semester. It is still a work-in-progress, but as I complete the labs, I will add info here!</p>
+<p>My hope is that this week is as bad as this class gets for me. I started working on the lab too late and ended up with an error I didn’t know how to debug after the weekend office hours were over. This meant when I encountered a bug I didn’t know how to fix, I had to wait to find a time during the week (after my checkoff was due) to meet with Prof.&nbsp;Brake. Still, I learned that asking for help, even when it should have been done earlier, is a good idea.</p>
+<p>The majority of work on the lab went smoothly. I felt myself becoming more comfortable with the FPGA workflow, and SystemVerilog was coming out of me more smoothly than it did last week. But, after I simulated everything and uploaded it to the FPGA, I got weird behavior I had no idea how to diagnose. At the time, it felt almost impossible that I could stick in an oscilloscope probe and fix the issue. While I was frustratedly debugging on Tuesday night, I accidentally knocked a voltage regulator off the back of the FPGA. Something I’ve learned in my two years of engineering experience is that if it’s late at night and things start to break, the best decision is almost always to call it a night and deal with it later.</p>
+<p>On Thursday, I talked through my issue with Prof.&nbsp;Brake and realized that it must be due to a floating value somewhere. My classmate Troy (who had the same issue) suggested changing the internal pull-up on the input switches to 3.3kOhm instead of 100kOhm, and this fixed the problem. If I had gotten an earlier start, I would have been much less sad this week, but even with the sadness incurred due to this lab, it felt pretty awesome to see it finally working.</p>
+<p>My takeaways are these: 1. I need to start earlier so I can take advantage of tutoring hours, and 2. When I run into an issue, I should talk about it so anyone with the same issue or other applicable experience can help.</p>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="reflection,labreport" data-listing-date-sort="1725346800000" data-listing-file-modified-sort="1726612740121" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="776">
-<div class="thumbnail">
-<p><a href="./labs/lab1/lab1.html" class="no-external"></a></p><a href="./labs/lab1/lab1.html" class="no-external">
-<p class="card-img-top"><img src="labs\lab1\images\Block-Diagram.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./labs/lab1/lab1.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab1/lab1.html" class="no-external">Lab 1: FPGA and MCU Setup and Testing Introduction</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab1/lab1.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab1/lab1.html" class="no-external">Time spent: 15 hours</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab1/lab1.html" class="no-external">
-<div class="listing-date">
-Sep 3, 2024
-</div>
-<div class="listing-author">
-Avery Smith
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1725951600000" data-listing-file-modified-sort="1726553640753" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="605">
-<div class="thumbnail">
-<p><a href="./labs/lab2/lab2.html" class="no-external"></a></p><a href="./labs/lab2/lab2.html" class="no-external">
-<p class="card-img-top"><img src="labs\lab2\images\block_diagram.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./labs/lab2/lab2.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab2/lab2.html" class="no-external">Lab 2: Multiplexed 7-Segment Display</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab2/lab2.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab2/lab2.html" class="no-external">Time spent: 13 Hours</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab2/lab2.html" class="no-external">
-<div class="listing-date">
-Sep 10, 2024
-</div>
-<div class="listing-author">
-Avery Smith
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1726470000000" data-listing-file-modified-sort="1726605066375" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1169">
-<div class="thumbnail">
-<p><a href="./labs/lab3/lab3.html" class="no-external"></a></p><a href="./labs/lab3/lab3.html" class="no-external">
-<p class="card-img-top"><img src="labs\lab3\images\block_diagram.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./labs/lab3/lab3.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab3/lab3.html" class="no-external">Lab 3: Keypad Scanner</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab3/lab3.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab3/lab3.html" class="no-external">Time Spent: 13 hours</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab3/lab3.html" class="no-external">
-<div class="listing-date">
-Sep 16, 2024
-</div>
-<div class="listing-author">
-Avery Smith
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="reflection,labreport" data-listing-date-sort="1724742000000" data-listing-file-modified-sort="1725358340620" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<div class="thumbnail">
-<p><a href="./labs/lab4/lab4.html" class="no-external"></a></p><a href="./labs/lab4/lab4.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./labs/lab4/lab4.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab4/lab4.html" class="no-external">Lab 4: Digital Audio</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab4/lab4.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab4/lab4.html" class="no-external">
-
-
-
-</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab4/lab4.html" class="no-external">
-<div class="listing-date">
-Aug 27, 2024
-</div>
-<div class="listing-author">
-Avery Smith
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="reflection,labreport" data-listing-date-sort="1724742000000" data-listing-file-modified-sort="1725358340621" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<div class="thumbnail">
-<p><a href="./labs/lab5/lab5.html" class="no-external"></a></p><a href="./labs/lab5/lab5.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./labs/lab5/lab5.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab5/lab5.html" class="no-external">Lab 5: Interrupts</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab5/lab5.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab5/lab5.html" class="no-external">
-
-
-
-</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab5/lab5.html" class="no-external">
-<div class="listing-date">
-Aug 27, 2024
-</div>
-<div class="listing-author">
-Avery Smith
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="reflection,labreport" data-listing-date-sort="1724742000000" data-listing-file-modified-sort="1725358340621" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<div class="thumbnail">
-<p><a href="./labs/lab6/lab6.html" class="no-external"></a></p><a href="./labs/lab6/lab6.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./labs/lab6/lab6.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab6/lab6.html" class="no-external">Lab 6: The Internet of Things and Serial Peripheral Interface</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab6/lab6.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab6/lab6.html" class="no-external">
-
-
-
-</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab6/lab6.html" class="no-external">
-<div class="listing-date">
-Aug 27, 2024
-</div>
-<div class="listing-author">
-Avery Smith
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="reflection,labreport" data-listing-date-sort="1724742000000" data-listing-file-modified-sort="1725358340621" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<div class="thumbnail">
-<p><a href="./labs/lab7/lab7.html" class="no-external"></a></p><a href="./labs/lab7/lab7.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./labs/lab7/lab7.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./labs/lab7/lab7.html" class="no-external">Lab 7: The Advanced Encryption Standard</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./labs/lab7/lab7.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./labs/lab7/lab7.html" class="no-external">
-
-
-
-</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./labs/lab7/lab7.html" class="no-external">
-<div class="listing-date">
-Aug 27, 2024
-</div>
-<div class="listing-author">
-Avery Smith
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
