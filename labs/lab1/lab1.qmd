@@ -8,7 +8,6 @@ categories:
 draft: false
 ---
 
-## Lab 1: FPGA and MCU Setup and Testing Introduction
 Time spent: 15 hours
 
 [GitHub Repository](https://github.com/avsmith11/e155-lab1)
@@ -54,7 +53,7 @@ As you can see, despite the very large number required by the counter, the struc
 This diagram was interesting, and I'd love to learn what Radiant thinks it's doing here but I decided to move on and trust the process. Prof. Brake suggested that the long binary encodes some information like a lookup table would, but this is clearly not the hardware I implied.
 
 
-At this point, I had already assembled the 7-segment display circuit. The displays we used have a common-cathode design, meaning the display is powered by one pin, and each segment can be toggled by setting its corresponding pin low so current can drain through the LED. I placed a current-limiting resistor at the anode of each segment. This uses more resistors than having on at the common cathode, but ensures the current through each segment does not depend on how many are lit in total. The lab description suggests 5-20mA. I found the value of the resistor with R = 5V/20mA = 250Ohms.
+At this point, I had already assembled the 7-segment display circuit. The displays we used have a common-cathode design, meaning the display is powered by one pin, and each segment can be toggled by setting its corresponding pin low so current can drain through the LED. I placed a current-limiting resistor at the anode of each segment. This uses more resistors than having on at the common cathode, but ensures the current through each segment does not depend on how many are lit in total. The lab description suggests 5-20mA. I used a 250Ohm resistor, so I = (3.3V - 0.7V)/250 Ohm = 10mA
 
 ![](images/Schematic.jpg)
 
