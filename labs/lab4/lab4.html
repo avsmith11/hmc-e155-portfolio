@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Avery Smith">
-<meta name="dcterms.date" content="2024-08-27">
+<meta name="dcterms.date" content="2024-10-02">
 
 <title>Lab 4: Digital Audio – E155 Portfolio</title>
 <style>
@@ -41,6 +41,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -122,7 +124,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lab-4-digital-audio" id="toc-lab-4-digital-audio" class="nav-link active" data-scroll-target="#lab-4-digital-audio">Lab 4: Digital Audio</a></li>
+  <li><a href="#demo-fur-elise" id="toc-demo-fur-elise" class="nav-link active" data-scroll-target="#demo-fur-elise">DEMO: Fur Elise</a></li>
+  <li><a href="#demo-thunderstruck" id="toc-demo-thunderstruck" class="nav-link" data-scroll-target="#demo-thunderstruck">DEMO: Thunderstruck</a></li>
+  <li><a href="#main-goals" id="toc-main-goals" class="nav-link" data-scroll-target="#main-goals">Main Goals</a></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a>
+  <ul class="collapse">
+  <li><a href="#frequency-timer" id="toc-frequency-timer" class="nav-link" data-scroll-target="#frequency-timer">Frequency Timer</a></li>
+  <li><a href="#delay-timer" id="toc-delay-timer" class="nav-link" data-scroll-target="#delay-timer">Delay Timer</a></li>
+  <li><a href="#other-considerations" id="toc-other-considerations" class="nav-link" data-scroll-target="#other-considerations">Other Considerations</a></li>
+  <li><a href="#main-function" id="toc-main-function" class="nav-link" data-scroll-target="#main-function">main function</a></li>
+  </ul></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
   </ul>
 </nav>
     </div>
@@ -132,11 +145,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Lab 4: Digital Audio</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">reflection</div>
-    <div class="quarto-category">labreport</div>
-  </div>
-  </div>
+</div>
 
 
 
@@ -152,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 27, 2024</p>
+      <p class="date">October 2, 2024</p>
     </div>
   </div>
   
@@ -164,8 +173,61 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="lab-4-digital-audio" class="level2">
-<h2 class="anchored" data-anchor-id="lab-4-digital-audio">Lab 4: Digital Audio</h2>
+<p>Time Spent: 13 hours</p>
+<p><a href="https://github.com/avsmith11/e155-lab4">GitHub Repository</a></p>
+<section id="demo-fur-elise" class="level3">
+<h3 class="anchored" data-anchor-id="demo-fur-elise">DEMO: Fur Elise</h3>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="images/Fur_Elise.MOV"></video></div>
+</section>
+<section id="demo-thunderstruck" class="level3">
+<h3 class="anchored" data-anchor-id="demo-thunderstruck">DEMO: Thunderstruck</h3>
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="images/Thunderstruck.MOV"></video></div>
+</section>
+<section id="main-goals" class="level2">
+<h2 class="anchored" data-anchor-id="main-goals">Main Goals</h2>
+<p>This week, I was tasked to design and build a solution to play melodies from a speaker. The main hurdle was the low-level implementation of drivers for on-board peripherals.</p>
+</section>
+<section id="design" class="level2">
+<h2 class="anchored" data-anchor-id="design">Design</h2>
+<p>To play melodies, you need a way to generate tone and a way to control the duration of this tone. The STM32L432KC MCU we’re using has several on-board peripherals including 11 timers. These timers are widely configurable and can operate at a wide range of frequencies (MHz - minutes). For this project, I chose to use the general-purpose timers 15 and 16—one to generate settable frequencies between 60 Hz and 1000 Hz and another to generate settable delays between 0.5 ms and 30s.</p>
+<p>The block diagram below shows how the clock can be configured. The counter is the main part of the clock which ticks up every CK_CNT. The frequency of CK_CNT is equal to the internal clock (CK_INT) divided by the value in the prescaler (PSC prescaler). The auto-reload and capture/compare always check the values of the counter. When the counter reaches the value in the auto-reload register (ARR), the counter is reset and an update signal is generated. If the counter reaches the value in the capture/compare register (CCR), an update signal is generated (note, this will only happen if CCR &lt; ARR). The timers can be configured such that an output pin can be driven directly from a signal generated by the capture/compare register that goes high when CNT&gt;CCR. These clocks allow generation of a PWM signal with a duty cycle which can be set in software equal to (1-CCR)/ARR that is sent directly to an output pin.</p>
+<p><img src="images/TIM16_BD.jpg" class="img-fluid"></p>
+<p>The system clock into both of the timers was set to 4MHz. The prescaler, counter, auto-reload, and capture/compare are all 16-bit values (1 - 65,536).</p>
+<section id="frequency-timer" class="level3">
+<h3 class="anchored" data-anchor-id="frequency-timer">Frequency Timer</h3>
+<p>The frequency timer (TIM16) is required to produce frequencies down to 80Hz, but with a prescaler of 1 (CK_CNT = CK_INT = 4MHz), the auto-reload can be set to produce values between 60.03Hz and 4MHz.</p>
+<p>min freq = 4MHz/1 = 4MHz || max freq = 4MHz/(2^16-1) = 60.03Hz, where freq = CK_CNT / ARR (counter is blocked when ARR = 0)</p>
+<p>In software, the ARR is set to a calculated value to achieve the required frequency and CCR is set to ARR/2 to get a 50% waveform.</p>
+<p>Since F = CK_CNT / ARR, ARR = CK_CNT / F = 4MHz / F, where F is given by the song data.</p>
+<p>ARR can only be an integer, so there is some error in the output frequency due to rounding. The difference between possible frequencies gets smaller as ARR increases. So, for higher frequencies, the error will be greater than for smaller frequencies. I calculated the maximum possible error for a given frequency around 1000Hz (the maximum required frequency for this lab) to ensure it is under the 1% tolerance required. The maximum possible error in frequency at ~1000Hz is half of the difference between achievable frequencies since a frequency between allowed frequencies will either be rounded up or down. Using the equation, we can find that ARR = 4000 for F = 1000 Hz. So I compared the frequencies from ARR = 4000 and 4001 to find the error. I also calculated the error at around 80Hz (ARR = 50000) out of curiosity.</p>
+<p>max error @~1000Hz = 1/2 * (4MHz/4000 - 4MHz/4001) = 0.12Hz &lt; 1%*1000Hz</p>
+<p>max error @~80Hz = 1/2 * (4MHz/50000 - 4MHz/50001) = 0.0008Hz &lt; 1%80Hz</p>
+<p>These calculations confirm that the error is below 1% throughout the frequency range required by the lab.</p>
+</section>
+<section id="delay-timer" class="level3">
+<h3 class="anchored" data-anchor-id="delay-timer">Delay Timer</h3>
+<p>For the delay timer, I decided to use CK_CNT = 0.5ms as the base unit, since that is mostly imperceptible and allows for delays up to 32.8s. The math for this was easier in the time domain, so I found the clock period TCK_INT = 1/4MHz = 2.5E-7s. To set TCK_CNT = 0.5ms, I set PSC = TCK_CNT/TCK_INT= 2000. Then, to set a specific delay, ARR = delay/TCK_CNT.</p>
+<p>With this configuration, the maximum and minimum delays are as follows:</p>
+<p>Tmax = TCNT_CLK*(2^16-1) = 32.7675s || Tmin = TCNT_CLK(1) = 0.5ms</p>
+</section>
+<section id="other-considerations" class="level3">
+<h3 class="anchored" data-anchor-id="other-considerations">Other Considerations</h3>
+<p>To make the timers work, the system clock was configured to 4Mz and sent enabled for the required peripherals, and the output GPIO pin was set to take the output value directly from the frequency timer.</p>
+</section>
+<section id="main-function" class="level3">
+<h3 class="anchored" data-anchor-id="main-function">main function</h3>
+<p>The actual code for this project was relatively simple and is included below. I loop through the notes in the song of choice (in this case Fur Elise). The notes are pairs of frequencies and duration. The setPWM function configures the frequncy timer to the desired frequency, and the Delay function configures the delay timer and waits for the desired amount of time. The frequency goes directly to the speaker and the delay is used to time the loop through frequencies with the correct timing.</p>
+<p><img src="images/main.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">Testing</h2>
+<p>I tested this design using the debug feature in Segger. The implementation was at the register level, so using the internal register map included in Segger, I could compare the register values to what I intended. Once I got rid of obvious bugs, I built the circuit and used an oscilloscope to find bugs with the output. The debugging process was made easier by checking with peers and grutors to identify issues with the registers since even with the reference manual, there are still gaps in my understanding of all the registers. I hope to work on this in the next lab, but by using these methods while stepping through my code in the debugger, I was able to make the lab work.</p>
+</section>
+<section id="implementation" class="level2">
+<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
+<p>The physical implementation of this lab called for an LM386 auditio amplifier to provide higher voltage and current to the speaker than could be achieved. The datasheet included an example design that I slightly modified. The amplification is unimportant since the output is a square wave, so high/low is all I need. I also included a potentiometer on the output to control the speaker’s volume.</p>
+<p>![] (images/circuit.png)</p>
 
 
 </section>
@@ -592,6 +654,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
+<script>videojs(video_shortcode_videojs_video2);</script>
 
 
 
