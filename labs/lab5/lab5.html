@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Avery Smith">
-<meta name="dcterms.date" content="2024-08-27">
+<meta name="dcterms.date" content="2024-10-28">
 
 <title>Lab 5: Interrupts – E155 Portfolio</title>
 <style>
@@ -122,7 +122,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lab-5-interrupts" id="toc-lab-5-interrupts" class="nav-link active" data-scroll-target="#lab-5-interrupts">Lab 5: Interrupts</a></li>
+  <li><a href="#main-goals" id="toc-main-goals" class="nav-link active" data-scroll-target="#main-goals">Main Goals</a></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">Design</a>
+  <ul class="collapse">
+  <li><a href="#interrupts" id="toc-interrupts" class="nav-link" data-scroll-target="#interrupts">interrupts</a></li>
+  <li><a href="#main-function" id="toc-main-function" class="nav-link" data-scroll-target="#main-function">main function</a></li>
+  </ul></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
   </ul>
 </nav>
     </div>
@@ -132,11 +139,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Lab 5: Interrupts</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">reflection</div>
-    <div class="quarto-category">labreport</div>
-  </div>
-  </div>
+</div>
 
 
 
@@ -152,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 27, 2024</p>
+      <p class="date">October 28, 2024</p>
     </div>
   </div>
   
@@ -164,8 +167,65 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="lab-5-interrupts" class="level2">
-<h2 class="anchored" data-anchor-id="lab-5-interrupts">Lab 5: Interrupts</h2>
+<p>Time Spent: ~10 hours (lost track of time)</p>
+<p><a href="https://github.com/avsmith11/e155-lab5/tree/main">Github Repository</a></p>
+<section id="main-goals" class="level2">
+<h2 class="anchored" data-anchor-id="main-goals">Main Goals</h2>
+<p>This project aimed to measure the speed of a motor with a quadrature encoder using hardware interrupts rather than polling in software. The specs include that the update rate should be at least 1Hz and that the speed is reported as zero when the motor is not spinning.</p>
+</section>
+<section id="design" class="level2">
+<h2 class="anchored" data-anchor-id="design">Design</h2>
+<p>The motor encoder is a disk with alternating regions that cause its two outputs, A and B, to alternate between high and low 120 times per revolution of the motor, where B is phase-shifted 90 degrees behind A. The idea is that after initializing everything, the main loop would only be responsible for calculating the motor speed based on some global variable set by the interrupt handler.</p>
+<p>The benefits of using interrupts over polling are twofold. First, interrupts use fewer processor resources because the edge detection and timing are all done with hardware rather than software and the interrupt code only runs when it needs to. The other advantage is in precision. Since the time between interrupts is on the order of microseconds, there is a real possibility that polling with the CPU would miss an edge, resulting in a halfinf of measured frequency. Also, the definition is limited to however long it takes the main loop to run. In this case, the main loop is very quick, but in other applications, this could be a bigger issue (or even this application if I’d chosen to implement averaging).</p>
+<section id="interrupts" class="level3">
+<h3 class="anchored" data-anchor-id="interrupts">interrupts</h3>
+<p>When writing interrupts, it’s important to make them as short as possible, since the program might not behave as intended if the interrupt handler is still running when an interrupt is observed.</p>
+<p>The minimum that the handler has to do (because of information available within the handler that is not easily accessible from the main loop) is to report the time since the last interrupt and whether the motor is going forward or backward. Since the interrupt is triggered on the rising and falling edges of both signals, it is triggered 4 times (equally spaced) per pulse. Therefore, the time between interrupts, T_interrupt is given by T_interrupt = T_pulse/4, where T_pulse = T_revolution/120.</p>
+<p>On the MCU, several interrupts are available from GPIO inputs. I chose to use one that is triggered by several pins (EXTI_9_5_IRQ which is triggered by pins 9-5) so that the same interrupt can be run for both A and B inputs.</p>
+<p>The time between interrupts was tracked using one of the basic timers on the MCU (TIM6). The reset handler is responsible for reading and resetting this timer which was configured to have a 1us base unit. If the motor is in reverse, this value is negated before being stored to a global variable.</p>
+<p>Due to the encoder’s design, the motor’s direction can be determined if we only know which signal triggered the interrupt and the state of both A and B inputs. Figure 1b shows the 8 cases that could trigger an interrupt.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/quadrature_encoder.gif" class="img-fluid figure-img"></p>
+<figcaption>Figure 1a: how to interpret the quadrature encoder output</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/diagram.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 1b: how to interpret the quadrature encoder outupt cont’d</figcaption>
+</figure>
+</div>
+<p>Whether the interrupt was triggered by a rising or falling edge is not directly available, but can be determined from the current value of the interrupt trigger signal (if A triggered the interrupt and is high, it was a rising edge, if A triggered the interrupt and is low, it was a falling edge, etc.). This logic was applied to make the following flowchart to find motor direction.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/flowchart.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: interrupt flowchart</figcaption>
+</figure>
+</div>
+<p>This flowchart was implemented using if statements in the interrupt handler.</p>
+</section>
+<section id="main-function" class="level3">
+<h3 class="anchored" data-anchor-id="main-function">main function</h3>
+<p>The main function calls all of the configuration functions before entering into a main loop. The loop calculates rev/s and prints to the debug terminal. T_interrupt is set in seconds based on the microsecond timer value stored as a global variable in the interrupt handler.</p>
+<p>Given that T_interrupt = T_pulse/4 = (T_revolution/120)/4 = T_revolution/ 480, rev/s = 1/(480*T_interrupt)</p>
+<p>Lastly, the main loop checks to see if enough time has elapsed since the last interrupt that we should call the motor still. This was implemented with a second timer (TIM7) configured to have a 1ms base unit. Every time the reset handler runs, this timer is reset. The main loop checks if its value is above 1000 (meaning 1 second has elapsed since the last interrupt). If 1s elapses without an interrupt, T_interrupt is set to 0 and won’t be reset until the interrupt runs again.</p>
+</section>
+</section>
+<section id="implementation" class="level2">
+<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
+<p>The physical implementation of this project is very simple. The motor takes up to 12V power to run, and the encoder takes 5V power. The A and B outputs of the encoder are 5V signals, so 5V tolerant GPIO pins were chosen. I chose pins PA6 and PA8 since they were available on the breakout board and 5V tolerant.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/pinout_diagram.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: motor pinout diagram</figcaption>
+</figure>
+</div>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">Testing</h2>
+<p>Thankfully, I didn’t run into too many problems with this lab. The first time I ran the program with the debugger, the terminal was printing the format of the rev/s string, but didn’t include the floating value. This was just a configuration error in the SEGGER and I had to enable printing floats. The other issue was something far outside of the scope of this project, where PLL could not be configured in debug mode. I spoke to Kavi about this, and he said the only solution he found was to not use PLL or not use the debugger. Since I needed the debug console to print values, I chose to use the default 4MHz clock instead of configuring PLL for 80Hz. This may result in slightly worse definition in the measurement, but it is still within spec.</p>
+<p>Once the design worked as intended, I confirmed that the output was correct by approximating the rotation rate using a metronome app on my phone.</p>
 
 
 </section>
