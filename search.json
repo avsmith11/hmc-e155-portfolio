@@ -21,6 +21,48 @@
     "text": "I want to (and am required by my instructor) to start off this blog by discussing my learning goals for this course. First, I’ll talk a bit about why I chose to take this course, then I’ll discuss what I’d like to get out of it. For context for anyone unrelated to Harvey Mudd College, E155 otherwise known as Micro Ps is one of the most feared in the engineering department. This is mostly due to the challenging work and hours and hours of lab-time required every week. However, anyone who’s taken it will also tell you that they learned more in this class than in any other they’ve taken. It follows the concepts of E85: Digital Electronics and Computer Engineering and was recommded for those who enjoyed that class. And, well, as of last semester when I took E85, it was one of the best I had taken so far. This came as no srprise since I’ve always been interested in electronics, especially digital electronics, so when it came time to choose my courses for this semester and microprocessors was offered as an upper-div elective, I decided to take it.\nI expect that this class will be the most demanding I have ever taken, requiring lots of time and expecting high-quality work. I’ve had to face the first challenge before, but I’ve yet to take a class that demands high-quality deliverables like that. I see this as an opportunity to dip my feet in to what it’s like to be a real engineer. In prior classes like E80 (a project-based systems/electronics/robotics course required for the major), the deliverables were important, but what was more important was our work and learning. In this class, I get the sense that our end-products are the most important–like in most real-world engineering jobs. I love to problem-solve and find creative solutions to difficult problems, but I sometimes have trouble seeing things through to the end and developing high-quality products. I’m excited to take our TA’s advice and enjoy this class by putting in the time. There’s so much I’m excited to explore, and I can’t wait to get into it."
   },
   {
+    "objectID": "labs/lab7/lab7.html",
+    "href": "labs/lab7/lab7.html",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "",
+    "text": "Time Spent: ~15 hours (lost track of time again)\nGithub Repository"
+  },
+  {
+    "objectID": "labs/lab7/lab7.html#main-goals",
+    "href": "labs/lab7/lab7.html#main-goals",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "Main Goals",
+    "text": "Main Goals\nIn this lab, I designed a hardware accelerator for AES on the FPGA. Code was provided to send and read a key and plaintext from the MCU to the FPGA over SPI, then check the SPI output cyphertext from the FPGA. The point of a hardware accelerator is that it can perform the encryption much faster than a CPU, and it frees the CPU to perform other operations while the transfer and computation are performed. Hardware acceleration is a growing field in computer system design, and this project outlined how powerful a tool can be."
+  },
+  {
+    "objectID": "labs/lab7/lab7.html#design",
+    "href": "labs/lab7/lab7.html#design",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "Design",
+    "text": "Design\nThe requirement was to design a system on the FPGA that takes in plaintext and outputs cyphertext using the algorithm explained in section 5 of the AES Documentation. The algorithm includes 10 rounds of four operations, applying a different, algorithmically generated round key each round. I designed a module to perform each of the four steps, plus one to generate the next round key from the previous key (as specified in section 5.2), and a controller to manage the datapath for each round, when the process starts, and when the “done” flag is raised.\nMy design used six modules and was set up to accept the output of the previous round for the next round. The main reason for this was the size of the FPGA which could not accommodate 10 copies of each module in one implementation. The block diagram below shows this configuration.\n\n\n\nFigure 1: AES block diagram\n\n\nI was provided a function to perform mixColumns in the starter code, and I wrote modules for subBytes, shiftRows, addRoundKey, and genRoundKey, plus the controller which I implemented as an FSM. The FSM (figure 2) accounts for the 10 rounds, plus a state that waits for a load input from the MCU, and a state that asserts “done” to signal to the SPI module that the cyphertext output is ready to shift back to the MCU.\n\n\n\nFigure 2: Controller FSM"
+  },
+  {
+    "objectID": "labs/lab7/lab7.html#simulation",
+    "href": "labs/lab7/lab7.html#simulation",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "Simulation",
+    "text": "Simulation\nI designed a testbench and simulated each module individually before putting them together. The AES documentation provides clear step-by-step test cases which I used to double-check each module’s output. Below are the Questa waveforms showing each module’s success.\n\n\n\nFigure 3: subBytes simulation\n\n\n\n\n\nFigure 4: shiftRows simulation\n\n\n\n\n\nFigure 5.1: genRoundKey simulation for rounds 1-3\n\n\n\n\n\nFigure 5.2: genRoundKey simulation for rounds 4-6\n\n\n\n\n\nFigure 5.3: genRoundKey simulation for rounds 7-9\n\n\n\n\n\nFigure 5.4: genRoundKey simulation for round 10\n\n\n\n\n\nFigure 6: addRoundKey simulation\n\n\nOnce I got all of the submodules to work as expected, I used the provided aes_spi testbench to simulate the whole implementation. I used this testbench to debug the controllerFSM.\n\n\n\nFigure 7: full simulation"
+  },
+  {
+    "objectID": "labs/lab7/lab7.html#implementation",
+    "href": "labs/lab7/lab7.html#implementation",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "Implementation",
+    "text": "Implementation\nOnce this simulated correctly, I met the proficiency requirements, but I wanted to implement this in hardware as well. I synthesized the design on Radiant and uploaded it to the FPGA. The implementation used a total of 1580 LUTs.\nThe pins connected to SW7 on the dev board were used to easily connect the FPGA and MCU."
+  },
+  {
+    "objectID": "labs/lab7/lab7.html#testing",
+    "href": "labs/lab7/lab7.html#testing",
+    "title": "Lab 7: The Advanced Encryption Standard",
+    "section": "Testing",
+    "text": "Testing\nI used a logic analyzer to test the design. It did not work initially, but I determined it was an issue with the timing of the “done” signal. Once this was fixed, the design worked correctly.\nIn Figure 8 we can see the key and plaintext shift in while the load signal is high, then a very small delay while the FPGA applies AES, then the cyphertext shift out. The cyphertext was then checked on the MCU, and the corresponding “correct” LED on the dev board was lit."
+  },
+  {
     "objectID": "labs/lab5/lab5.html",
     "href": "labs/lab5/lab5.html",
     "title": "Lab 5: Interrupts",
@@ -172,7 +214,7 @@
     "href": "labs.html",
     "title": "E155 Labs",
     "section": "",
-    "text": "These are reflections and documentation from all the labs I will work on this semester. It is still a work-in-progress, but as I complete the labs, I will add info here!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLab 1: FPGA and MCU Setup and Testing Introduction\n\n\n\n\n\n\n\n\n\n\n\nSep 3, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 2: Multiplexed 7-Segment Display\n\n\n\n\n\n\n\n\n\n\n\nSep 10, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 3: Keypad Scanner\n\n\n\n\n\n\n\n\n\n\n\nSep 16, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 4: Digital Audio\n\n\n\n\n\n\n\n\n\n\n\nOct 2, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 5: Interrupts\n\n\n\n\n\n\n\n\n\n\n\nOct 28, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 6: The Internet of Things and Serial Peripheral Interface\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 7: The Advanced Encryption Standard\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\nNo matching items"
+    "text": "These are reflections and documentation from all the labs I will work on this semester. It is still a work-in-progress, but as I complete the labs, I will add info here!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLab 1: FPGA and MCU Setup and Testing Introduction\n\n\n\n\n\n\n\n\n\n\n\nSep 3, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 2: Multiplexed 7-Segment Display\n\n\n\n\n\n\n\n\n\n\n\nSep 10, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 3: Keypad Scanner\n\n\n\n\n\n\n\n\n\n\n\nSep 16, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 4: Digital Audio\n\n\n\n\n\n\n\n\n\n\n\nOct 2, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 5: Interrupts\n\n\n\n\n\n\n\n\n\n\n\nOct 28, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 6: The Internet of Things and Serial Peripheral Interface\n\n\n\n\n\n\n\n\n\n\n\nAug 27, 2024\n\n\nAvery Smith\n\n\n\n\n\n\n\n\n\n\n\n\nLab 7: The Advanced Encryption Standard\n\n\n\n\n\n\n\n\n\n\n\nNov 12, 2024\n\n\nAvery Smith\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/week1.html",
